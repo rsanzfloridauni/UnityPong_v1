@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public float speed = 10f;
+    public float speed = 6f;
     public float limDirYneg = -0.9f;
     public float limDirYpos = 0.9f;
     private Rigidbody2D rb;
