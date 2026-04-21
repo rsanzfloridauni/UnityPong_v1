@@ -6,10 +6,12 @@ public class Ball : MonoBehaviour
     public float limDirYneg = -0.9f;
     public float limDirYpos = 0.9f;
     private Rigidbody2D rb;
+    private GameManager gm;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        gm = FindFirstObjectByType<GameManager>();
         Launch();
     }
 
@@ -26,6 +28,13 @@ public class Ball : MonoBehaviour
     {
         if (Mathf.Abs(transform.position.x) > 11f)
         {
+            if (transform.position.x > 11f)
+            {
+                gm.ScoreLeft();
+            } else
+            {
+                gm.ScoreRight();
+            }
             transform.position = Vector2.zero;
             Launch();
         }
