@@ -7,11 +7,14 @@ public class Ball : MonoBehaviour
     public float limDirYpos = 0.9f;
     private Rigidbody2D rb;
     private GameManager gm;
+    public AudioClip hitSound;
+    private AudioSource audioSource;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         gm = FindFirstObjectByType<GameManager>();
+        audioSource = GetComponent<AudioSource>();
         Launch();
     }
 
@@ -22,6 +25,14 @@ public class Ball : MonoBehaviour
 
         Vector2 dir = new Vector2(x, y).normalized;
         rb.linearVelocity = dir * speed;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Paddle"))
+        {
+            audioSource.PlayOneShot(hitSound);
+        }
     }
 
     void Update()
